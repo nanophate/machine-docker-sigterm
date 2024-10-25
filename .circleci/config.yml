@@ -1,0 +1,67 @@
+# .circleci/config.yml
+
+version: 2.1
+
+jobs:
+  build:
+    machine: true
+    steps:
+      - checkout  # Optional: Remove if not needed
+
+      # Validate Docker Installation (Optional)
+      - run:
+          name: Validate Docker Installation
+          command: |
+            docker --version
+
+      # Pull the Existing Docker Image
+      - run:
+          name: Pull Existing Docker Image
+          command: |
+            docker pull your-docker-image:latest  # Replace with your Docker image
+
+      # Run the Docker Container in Detached Mode
+      - run:
+          name: Run Docker Container
+          command: |
+            docker run -d --name test_container your-docker-image:latest  # Replace with your Docker image
+
+      # Verify the Container is Running
+      - run:
+          name: Check Running Containers
+          command: docker ps
+
+      # Wait for 2 Minutes (120 Seconds)
+      - run:
+          name: Wait for 2 Minutes
+          command: sleep 120
+
+      # Send SIGTERM to the Running Container
+      - run:
+          name: Send SIGTERM to Container
+          command: |
+            echo "Sending SIGTERM (signal 15) to 'test_container'..."
+            docker kill -s SIGTERM test_container
+
+      # Wait Briefly to Allow Graceful Shutdown
+      - run:
+          name: Wait After SIGTERM
+          command: sleep 5
+
+      # Fetch and Display Container Logs to Verify Graceful Shutdown
+      - run:
+          name: Retrieve Container Logs
+          command: docker logs test_container
+
+      # Verify the Container has Stopped
+      - run:
+          name: Verify Container Stopped
+          command: |
+            echo "Verifying if 'test_container' has stopped..."
+            docker ps -a | grep test_container || echo "Container 'test_container' has been stopped."
+
+      # Clean Up: Remove the Container if It's Still Present
+      - run:
+          name: Remove Docker Container
+          command: |
+            docker rm -f test_container || echo "Container already removed."
