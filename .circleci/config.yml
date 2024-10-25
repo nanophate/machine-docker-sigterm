@@ -18,7 +18,7 @@ jobs:
       - run:
           name: Run Docker Container
           command: |
-            docker run -d --name test_container cimg/base:current
+            docker run -d --name test_container cimg/base:current sh -c "sleep 300"
 
       # Verify the Container is Running
       - run:
