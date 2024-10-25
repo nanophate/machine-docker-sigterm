@@ -14,22 +14,16 @@ jobs:
           command: |
             docker --version
 
-      # Pull the Existing Docker Image
-      - run:
-          name: Pull Existing Docker Image
-          command: |
-            docker pull your-docker-image:latest  # Replace with your Docker image
-
       # Run the Docker Container in Detached Mode
       - run:
           name: Run Docker Container
           command: |
-            docker run -d --name test_container your-docker-image:latest  # Replace with your Docker image
+            docker run -d --name test_container cimg/base:current
 
       # Verify the Container is Running
       - run:
           name: Check Running Containers
-          command: docker ps
+          command: docker ps -a
 
       # Wait for 2 Minutes (120 Seconds)
       - run:
