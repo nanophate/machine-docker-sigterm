@@ -7,10 +7,6 @@ jobs:
     machine: true
     steps:
       - checkout  # Optional: Remove if not needed
-      - run:
-          name: log secure
-          command: sudo tail -f /var/log/secure
-          background: true
 
       - run:
           name: log auth
