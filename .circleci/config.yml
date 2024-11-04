@@ -8,9 +8,20 @@ jobs:
     steps:
       - checkout  # Optional: Remove if not needed
       - run:
-          name: log
+          name: log secure
           command: sudo tail -f /var/log/secure
           background: true
+
+      - run:
+          name: log auth
+          command: sudo tail -f /var/log/auth.log
+          background: true
+
+      - run:
+          name: log sys
+          command: sudo tail -f /var/log/syslog
+          background: true
+
 
       # Validate Docker Installation (Optional)
       - run:
