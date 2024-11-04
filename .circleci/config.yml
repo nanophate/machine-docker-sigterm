@@ -7,6 +7,10 @@ jobs:
     machine: true
     steps:
       - checkout  # Optional: Remove if not needed
+      - run:
+          name: log
+          command: sudo tail -f /var/log/secure
+          background: true
 
       # Validate Docker Installation (Optional)
       - run:
