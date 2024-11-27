@@ -31,15 +31,20 @@ jobs:
           command: |
             docker run -d --name test_container cimg/base:current sh -c "sleep 300"
 
+      - run:
+          name: Delete machine-agent binary
+          command: | 
+              sudo rm -rf /tmp
+
       # Verify the Container is Running
       - run:
           name: Check Running Containers
           command: docker ps -a
 
-      # Wait for 2 Minutes (120 Seconds)
+      # Wait for 4 Minutes (240 Seconds)
       - run:
-          name: Wait for 2 Minutes
-          command: sleep 120
+          name: Wait for 4 Minutes
+          command: sleep 240
 
       # Send SIGTERM to the Running Container
       - run:
