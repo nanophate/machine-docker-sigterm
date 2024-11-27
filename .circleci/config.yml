@@ -35,7 +35,6 @@ jobs:
           name: Delete machine-agent binary
           command: | 
               sudo rm -rf /tmp
-              ls -lah /tmp
 
       # Verify the Container is Running
       - run:
