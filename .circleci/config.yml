@@ -45,7 +45,7 @@ jobs:
       - run:
           name: Send SIGTERM to Container
           command: |
-            echo "Sending SIGTERM (signal 15) to 'test_container'..."
+            echo "Sending SIGTERM (signal 15) to 'test_container'......"
             docker kill -s SIGTERM test_container
 
       # Wait Briefly to Allow Graceful Shutdown
