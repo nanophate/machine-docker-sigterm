@@ -62,7 +62,7 @@ jobs:
       - run:
           name: Verify Container Stopped
           command: |
-            echo "Verifying if 'test_container' has stopped..."
+            echo "Verifying if 'test_container' has stopped......"
             docker ps -a | grep test_container || echo "Container 'test_container' has been stopped."
 
       # Clean Up: Remove the Container if It's Still Present
